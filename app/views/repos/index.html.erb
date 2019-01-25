@@ -1,11 +1,16 @@
 <h1>Indexing repos of the user: <%= @username %></h1>
-<table border="1">
-    <tr> <th>name of repo</th> <th>url</th> <th>language</th> </tr>
-<% @repos.each do |repo| %>
-    <tr class=<%=cycle('even', 'odd') %>>
-        <td><%= repo["name"] %></td>
-        <td><%= repo["url"] %></td>
-        <td><%= repo["language"] %></td>
-    </tr>
-<% end %>
-</table>
+
+<% if @repos.code != 200 %>
+    <p> Sorry. The user <%= @username %> doesn't exist </p>
+<% else %>
+    <table border="1">
+        <tr> <th>name of repo</th> <th>url</th> <th>language</th> </tr>
+        <% @repos.each do |repo| %>
+            <tr class=<%=cycle('even', 'odd') %>>
+                <td><%= repo["name"] %></td>
+                <td><%= repo["url"] %></td>
+                <td><%= repo["language"] %></td>
+            </tr>
+        <% end %>
+    </table>
+<%end%>
